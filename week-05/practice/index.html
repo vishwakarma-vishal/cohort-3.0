@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+<head>
+</head>
+
+<body>
+    <button onClick="sendRequest()">send request</button>
+</body>
+<script type="text/javascript">
+    async function sendRequest(){
+        const response = await fetch("http://localhost:4000/hello");
+        const data = await response.json();
+        console.log("response", data);
+    }
+</script>
+
+</html>
