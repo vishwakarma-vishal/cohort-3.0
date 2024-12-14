@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Practice state and component</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // state
+    let counter = 0;
+
+    // function to update counter
+    function updateCount(){
+        counter = parseInt(counter) + 1;
+        render();
+    }
+
+    // component
+    function buttonComponent(counter){
+        const button = document.createElement("button");
+        button.innerHTML = `counter ${counter}`;
+        return button;
+    }
+
+    // rendering (this thing is done by react)
+    function render() {
+        const body = document.getElementsByTagName("body")[0];
+        body.innerHTML = " ";
+        const button = buttonComponent(counter);
+        button.setAttribute("onClick","updateCount()");
+        body.appendChild(button);
+    }
+
+    render();
+</script>
+
+</html>
