@@ -1,32 +1,31 @@
 import './App.css'
+import { useState, memo } from 'react';
 import { RecoilRoot, useRecoilState, useSetRecoilState } from 'recoil';
 import { countAtom } from '../src/store/atom/countAtom';
 
 function App() {
+  const [count, setCount] = useState(0);
+
   return (
-    <RecoilRoot>
-      <div>
-        <Count />
-        <Increment />
-        <Decrement />
-      </div>
-    </RecoilRoot>
+    <div>
+      <Count count={count} />
+      <Increment setCount={setCount} />
+      <MemoDecrement />
+    </div>
   )
 }
 
-const Count = () => {
-  const count = useRecoilState(countAtom);
+const Count = ({ count }) => {
 
   return (
     <p> {count}</p>
   )
 }
 
-const Increment = () => {
-  const setCountAtom = useSetRecoilState(countAtom);
+const Increment = ({ setCount }) => {
 
   const increaseValue = () => {
-    setCountAtom((c) => c + 1);
+    setCount((c) => c + 1);
   }
 
   return (
@@ -34,16 +33,16 @@ const Increment = () => {
   )
 }
 
-const Decrement = () => {
-  const setCountAtom = useSetRecoilState(countAtom);
 
+const Decrement = () => {
   const decreaseValue = () => {
-    setCountAtom(c => c - 1);
   }
 
   return (
     <button onClick={decreaseValue}>Decrement</button>
   )
 }
+
+const MemoDecrement = memo(Decrement);
 
 export default App
